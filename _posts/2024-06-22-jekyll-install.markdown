@@ -2,7 +2,7 @@
 layout: post
 title:  "How I got Jekyll working with github pages"
 date:   2024-06-22 20:34:00 -0700
-categories: plex podman
+categories: jekyll
 ---
 ## Introduction
 
