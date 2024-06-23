@@ -16,11 +16,11 @@ The `assets` directory is a link to Chirpy docs. Delete the `assets` directory a
 ## Configure github actions to deploy the page
 
 Go into `Settings`.
-[Github Settings](/assets/lib/githubsettings.png)
+![Github Settings](/assets/lib/githubsettings.png)
 
 
 Click on `Pages`
-[Pages](/assets/lib/githubpages.png)
+![Pages](/assets/lib/githubpages.png)
 
 In the `Source` dropdown box, select `GitHub Actions`.
-[](/assets/lib/githubactionsconfig.png)
+![Github Actions Config](/assets/lib/githubactionsconfig.png)
