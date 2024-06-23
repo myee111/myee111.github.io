@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "How to run Plex with rootless Podman"
+date:   2024-06-22 15:37:00 -0700
+categories: plex podman
+---
+# Introduction
+In this blog I share how I configured my Fedora 40 server to run Plex as a rootless Podman container.
+
+[Podman](https://docs.podman.io/en/latest/) is an open source tool that runs [OCI](https://opencontainers.org/) compliant containers. This includes containers hosted at [docker hub.](https://hub.docker.com/) Podman can run containers in user accounts (ie. non-root accounts).
+
+[Plex](https://www.plex.tv/) lets you stream and share multimedia files. The nice thing about Plex is that it's supported on Apple TV and numerous other devices like set-top boxes and smart TVs.
