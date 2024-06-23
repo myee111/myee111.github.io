@@ -20,7 +20,6 @@ Go into `Settings`.
 
 ![Github Settings](/assets/lib/githubsettings.png)
 
-
 Click on `Pages`
 
 ![Pages](/assets/lib/githubpages.png)
