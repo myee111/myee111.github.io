@@ -4,14 +4,14 @@ title:  "How to run Plex with rootless Podman"
 date:   2024-06-23 19:56:00 -0700
 categories: podman plex
 ---
-# Introduction
+## Introduction
 In this blog entry I share how I configured my [Fedora](https://fedoraproject.org/) 40 server to run Plex as a rootless Podman container.
 
 [Podman](https://docs.podman.io/en/latest/) is an open source tool that runs [OCI](https://opencontainers.org/) compliant containers. This includes containers hosted at [docker hub.](https://hub.docker.com/) Podman can run containers in user accounts (ie. non-root accounts).
 
 [Plex](https://www.plex.tv/) lets you stream and share multimedia files. The nice thing about Plex is that it's supported on Apple TV and numerous other devices like set-top boxes and smart TVs.
 
-# Overview
+## Overview
 Here are the tasks required to set up the Plex container to run as a user owned service with Podman.
 
 0. Open firewall ports on container host.
@@ -21,7 +21,7 @@ Here are the tasks required to set up the Plex container to run as a user owned 
 4. Enable the podman service.
 5. Enable automatic updates to the Plex container.
 
-# Open firewall ports on container host
+## Open firewall ports on container host
 
 Run the following.
 ```bash
@@ -34,14 +34,14 @@ Then run the following to load the changes.
 sudo firewall-cmd --reload
 ```
 
-# Install Podman
+## Install Podman
 First, install Podman.
 
 ```terminal
 sudo dnf -y install podman
 ```
 
-# Create the `Plex` `systemd` unit file
+## Create the `Plex` `systemd` unit file
 
 The official documentation for the Plex container can be found [here](https://hub.docker.com/r/plexinc/pms-docker/).
 
@@ -79,7 +79,7 @@ PublishPort=32469:32469/tcp
 [Install]
 WantedBy=default.target
 ```
-## Further explanation of the `plex.container` file.
+### Further explanation of the `plex.container` file.
 
 - `ContainerName=plex`:
 This is self-explanatory. This is the name given to the container.
@@ -97,7 +97,7 @@ Sets timezone to `America/Vancouver`.
 
 - `PublishPort=32400:32400/tcp`: Map container ports to the host ports. Specifically, this key/value pair specifies that port `32400/tcp` of the container can be reached through port `32400` of the container host.
 
-# Persistent Volumes
+## Create Persistent Volumes
 
 In the previous section, we specified persistent volumes in the `plex.container` file as below.
 
@@ -134,7 +134,7 @@ User=myee
 Group=myee
 ```
 
-# Enable the podman service
+## Enable the podman service
 
 Load the unit files into systemd.
 ```bash
@@ -146,7 +146,7 @@ Enable and start the Plex service.
 systemctl --user start plex.service
 ```
 
-# Enable automatic updates
+## Enable automatic updates
 
 Enable automatic updates.
 ```bash
