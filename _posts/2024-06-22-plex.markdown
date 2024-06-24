@@ -1,12 +1,159 @@
 ---
 layout: post
 title:  "How to run Plex with rootless Podman"
-date:   2024-06-22 15:37:00 -0700
-categories: plex podman
+date:   2024-06-23 19:56:00 -0700
+categories: podman plex
 ---
 # Introduction
-In this blog I share how I configured my Fedora 40 server to run Plex as a rootless Podman container.
+In this blog entry I share how I configured my [Fedora](https://fedoraproject.org/) 40 server to run Plex as a rootless Podman container.
 
 [Podman](https://docs.podman.io/en/latest/) is an open source tool that runs [OCI](https://opencontainers.org/) compliant containers. This includes containers hosted at [docker hub.](https://hub.docker.com/) Podman can run containers in user accounts (ie. non-root accounts).
 
 [Plex](https://www.plex.tv/) lets you stream and share multimedia files. The nice thing about Plex is that it's supported on Apple TV and numerous other devices like set-top boxes and smart TVs.
+
+# Overview
+Here are the tasks required to set up the Plex container to run as a user owned service with Podman.
+
+0. Open firewall ports on container host.
+1. Install podman.
+2. Create the Plex systemd unit file.
+3. Create the persistent volume unit files.
+4. Enable the podman service.
+5. Enable automatic updates to the Plex container.
+
+# Open firewall ports on container host
+
+Run the following.
+```bash
+sudo firewall-cmd --add-port=1900/udp --add-port=5353/udp --add-port=8324/tcp --add-port=32410/udp --add-port=32412/udp --add-port=32413/udp --add-port=32414/udp --add-port=32469/tcp --permanent
+```
+This command loads a configuration to open all the specified ports.
+
+Then run the following to load the changes.
+```bash
+sudo firewall-cmd --reload
+```
+
+# Install Podman
+First, install Podman.
+
+```terminal
+sudo dnf -y install podman
+```
+
+# Create the `Plex` `systemd` unit file
+
+The official documentation for the Plex container can be found [here](https://hub.docker.com/r/plexinc/pms-docker/).
+
+Podman enables you to run containers as a service in a non-root account. We need to create a `systemd` unit file in our user account `myee`. We'll call it `plex.container`.
+
+```terminal
+vim ~/.config/containers/systemd/plex.container
+```
+
+Here's what's inside the `plex.container` file.
+
+```yaml
+[Service]
+Restart=always
+
+[Container]
+ContainerName=plex
+Image=docker.io/plexinc/pms-docker:latest
+Label="io.containers.autoupdate=registry"
+Environment=TZ=America/Vancouver
+Environment=VERSION=docker
+Volume=plex-config.volume:/config:Z
+Volume=plex-tv.volume:/tv:Z
+Volume=plex-movies.volume:/movies:Z
+PublishPort=32400:32400/tcp
+PublishPort=1900:1900/udp
+PublishPort=5353:5353/udp
+PublishPort=8324:8324/tcp
+PublishPort=32410:32410/udp
+PublishPort=32412:32412/udp
+PublishPort=32413:32413/udp
+PublishPort=32414:32414/udp
+PublishPort=32469:32469/tcp
+
+[Install]
+WantedBy=default.target
+```
+## Further explanation of the `plex.container` file.
+
+- `ContainerName=plex`:
+This is self-explanatory. This is the name given to the container.
+
+- `Image=docker.io/plexinc/pms-docker:latest`:
+Specify that we'll use the official plex container image. The `latest` tag also specifies the latest version of the container.
+
+- `Label="io.containers.autoupdate=registry"`:
+This label tells Podman to check for new versions of the container.
+
+- `Environment=TZ=America/Vancouver`:
+Sets timezone to `America/Vancouver`.
+
+- - `Volume=plex-config.volume:/config:Z`: Please see the section `Persistent Volumes` below.
+
+- `PublishPort=32400:32400/tcp`: Map container ports to the host ports. Specifically, this key/value pair specifies that port `32400/tcp` of the container can be reached through port `32400` of the container host.
+
+# Persistent Volumes
+
+In the previous section, we specified persistent volumes in the `plex.container` file as below.
+
+```ini
+Volume=plex-config.volume:/config:Z
+```
+
+If the volume doesn't already exist in `~/.local/share/containers/storage/volumes/`, Podman will create it. This key/value pair tells Podman that the `/config` directory in the container is to be mapped to a persistent volume. `plex-config.volume` is a file that is stored in `~/.config/containers/systemd/` with the `plex.container` file. The `Z` at the end of the `Volume` key/value pair specifies that the persistent volume is private to the `plex` container. `config`, `tv`, and `movies` each require their own volumes as specified by the container publisher Plex.
+
+The volumes can be found here:
+
+```terminal
+myee@protectli1 ~> ls .local/share/containers/storage/volumes/
+systemd-plex-movies/  systemd-plex-config/  systemd-plex-tv/
+```
+
+You must also create 3 files in `~/.config/containers/systemd/`
+
+1. `plex-config.volume`
+2. `plex-movies.volume`
+3. `plex-tv.volume`
+
+All three contain the following.
+```ini
+[Volume]
+User=<username>
+Group=<group>
+```
+
+In my example I have the following contents.
+```ini
+[Volume]
+User=myee
+Group=myee
+```
+
+# Enable the podman service
+
+Load the unit files into systemd.
+```bash
+systemctl --user daemon-reload
+```
+
+Enable and start the Plex service.
+```bash
+systemctl --user start plex.service
+```
+
+# Enable automatic updates
+
+Enable automatic updates.
+```bash
+systemctl --user enable --now podman-auto-update.service
+```
+
+Enable automatic updates to run on schedule at midnight.
+```bash
+systemctl --user enable --now podman-auto-update.timer
+```
