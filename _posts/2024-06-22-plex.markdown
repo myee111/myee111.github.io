@@ -45,7 +45,7 @@ sudo dnf -y install podman
 
 The official documentation for the Plex container can be found [here](https://hub.docker.com/r/plexinc/pms-docker/).
 
-Podman enables you to run containers as a service in a non-root account. We need to create a `systemd` unit file in our user account `myee`. We'll call it `plex.container`.
+Podman enables you to run containers as a service in a non-root account. We need to create a `systemd` unit file in our user account `myee`. We'll call it `plex.container`. All of the systemd unit files discussed are available [here](https://github.com/myee111/plex-rootless-podman-systemd-unit-files).
 
 ```terminal
 vim ~/.config/containers/systemd/plex.container
