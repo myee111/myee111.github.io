@@ -51,7 +51,7 @@ Podman enables you to run containers as a service in a non-root account. We need
 vim ~/.config/containers/systemd/plex.container
 ```
 
-Here's what's inside the `plex.container` file.
+Here's what's inside the `plex.container` file. Cut and paste the configuration file below into `plex.container`.
 
 ```yaml
 [Service]
