@@ -114,10 +114,10 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: # <gh-username>/<repo>
-    repo_id:
-    category:
-    category_id:
+    repo: myee111/myee111.github.io # <gh-username>/<repo>
+    repo_id: R_kgDOMNGtvA
+    category: General
+    category_id: DIC_kwDOMNGtvM4CgWKk
     mapping: # optional, default to 'pathname'
     strict: # optional, default to '0'
     input_position: # optional, default to 'bottom'
