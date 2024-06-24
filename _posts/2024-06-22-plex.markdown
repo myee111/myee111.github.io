@@ -163,3 +163,9 @@ Enable automatic updates to run on schedule at midnight.
 ```bash
 systemctl --user enable --now podman-auto-update.timer
 ```
+
+## Test it out
+
+Open a browser window to your Podman host at port 32400.
+
+![Plex Welcome](/assets/lib/plex-welcome.png)
