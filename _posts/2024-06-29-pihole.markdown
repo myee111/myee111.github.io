@@ -1,0 +1,14 @@
+---
+layout: post
+title:  "Run Pihole as a Rootless Container"
+date:   2024-06-29 19:56:00 -0700
+categories: podman plex
+---
+## Introduction
+In this blog entry I share how I configured my [Fedora](https://fedoraproject.org/) 40 server to run Plex as a rootless Podman container.
+
+[Podman](https://docs.podman.io/en/latest/) is an open source tool that runs [OCI](https://opencontainers.org/) compliant containers. This includes containers hosted at [docker hub.](https://hub.docker.com/) Podman can run containers in user accounts (ie. non-root accounts).
+
+[Plex](https://www.plex.tv/) lets you stream and share multimedia files. The nice thing about Plex is that it's supported on Apple TV and numerous other devices like set-top boxes and smart TVs.
+
+
