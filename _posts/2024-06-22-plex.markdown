@@ -25,7 +25,7 @@ Here are the tasks required to set up the Plex container to run as a user owned 
 
 Run the following.
 ```bash
-sudo firewall-cmd --add-port=1900/udp --add-port=5353/udp --add-port=8324/tcp --add-port=32410/udp --add-port=32412/udp --add-port=32413/udp --add-port=32414/udp --add-port=32469/tcp --permanent
+sudo firewall-cmd --add-port=1900/udp --add-port=5353/udp --add-port=8324/tcp --add-port=32400 --add-port=32410/udp --add-port=32412/udp --add-port=32413/udp --add-port=32414/udp --add-port=32469/tcp --permanent
 ```
 This command loads a configuration to open all the specified ports.
 
