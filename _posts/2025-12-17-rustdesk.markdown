@@ -31,7 +31,7 @@ In `~/.config/containers/systemd/rustdesk.container`, write the following config
 AutoUpdate=registry
 Image=ghcr.io/rustdesk/rustdesk-server:latest
 Label="io.containers.autoupdate=registry"
-Exec=hbbr
+Exec=hbbs
 Volume=rustdesk.volume:/root:Z
 Network=host
 PublishPort=21114:21114/tcp
