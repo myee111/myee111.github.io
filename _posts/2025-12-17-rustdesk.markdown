@@ -10,6 +10,7 @@ categories: podman rustdesk
 1) Open up the right ports.
 2) Write the rustdesk systemd unit file.
 3) Write a volume file.
+4) Copy the rustdesk client encryption key.
 
 ## Open up the required firewall ports.
 
@@ -59,4 +60,20 @@ In the file, write the following configuration.
 [Volume]
 User=myee
 Group=myee
+```
+
+## Copy the rustdesk client encryption key.
+
+In ` .local/share/containers/storage/volumes/systemd-rustdesk/_data/`, copy the key in `id_ed25519.pub`
+
+```bash
+myee@protectli1 ~> ls -lart .local/share/containers/storage/volumes/systemd-rustdesk/_data/
+total 108
+drwx------. 3 myee myee    19 Dec 17 11:57 ../
+-rw-r--r--. 1 myee myee    44 Dec 17 12:25 id_ed25519.pub
+-rw-r--r--. 1 myee myee    88 Dec 17 12:25 id_ed25519
+-rw-r--r--. 1 myee myee  4096 Dec 17 12:25 db_v2.sqlite3
+drwxr-xr-x. 2 myee myee   117 Dec 17 12:25 ./
+-rw-r--r--. 1 myee myee 32768 Dec 17 12:25 db_v2.sqlite3-shm
+-rw-r--r--. 1 myee myee 61832 Dec 17 12:25 db_v2.sqlite3-wal
 ```
