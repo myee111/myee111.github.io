@@ -1,0 +1,62 @@
+---
+layout: post
+title:  "How to install Rustdesk"
+date:   2025-12-17 11:30:00 -0700
+categories: podman rustdesk
+---
+
+## Introduction
+
+1) Open up the right ports.
+2) Write the rustdesk systemd unit file.
+3) Write a volume file.
+
+## Open up the required firewall ports.
+
+```bash
+sudo firewall-cmd --add-port=21114/tcp --add-port=21115/tcp --add-port=21116/tcp --add-port=21116/udp --add-port=21118/tcp --add-port=21117/tcp --add-port=21119/tcp --permanent
+```
+
+Then run the following to load the changes.
+```bash
+sudo firewall-cmd --reload
+```
+
+## Write the rustdesk systemd unit file.
+
+In `~/.config/containers/systemd/rustdesk.container`, write the following configuration.
+
+```yaml
+[Container]
+AutoUpdate=registry
+Image=ghcr.io/rustdesk/rustdesk-server:latest
+Label="io.containers.autoupdate=registry"
+Exec=hbbr
+Volume=rustdesk.volume:/root:Z
+Network=host
+PublishPort=21114:21114/tcp
+PublishPort=21115:21115/tcp
+PublishPort=21116:21116/tcp
+PublishPort=21116:21116/udp
+PublishPort=21118:21118/tcp
+PublishPort=21117:21117/tcp
+PublishPort=21119:21119/tcp
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
+```
+
+## Write the volume file.
+
+In `~/.config/containers/systemd/`, create the file `rustdesk.volume`.
+
+In the file, write the following configuration.
+
+```ini
+[Volume]
+User=myee
+Group=myee
+```
