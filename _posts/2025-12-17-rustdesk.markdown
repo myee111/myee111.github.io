@@ -64,6 +64,8 @@ Group=myee
 
 ## Copy the rustdesk client encryption key.
 
+After starting the rustdesk service `systemctl --user start rustdesk.service` you need to copy the encryption key. Starting the rustdesk service will write a bunch of files in ` .local/share/containers/storage/volumes/systemd-rustdesk/_data/`.
+
 In ` .local/share/containers/storage/volumes/systemd-rustdesk/_data/`, copy the key in `id_ed25519.pub`
 
 ```bash
