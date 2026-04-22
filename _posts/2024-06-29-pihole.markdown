@@ -5,10 +5,47 @@ date:   2024-06-29 19:56:00 -0700
 categories: podman plex
 ---
 ## Introduction
-In this blog entry I share how I configured my [Fedora](https://fedoraproject.org/) 40 server to run Plex as a rootless Podman container.
 
-[Podman](https://docs.podman.io/en/latest/) is an open source tool that runs [OCI](https://opencontainers.org/) compliant containers. This includes containers hosted at [docker hub.](https://hub.docker.com/) Podman can run containers in user accounts (ie. non-root accounts).
+`pihole.container`
 
-[Plex](https://www.plex.tv/) lets you stream and share multimedia files. The nice thing about Plex is that it's supported on Apple TV and numerous other devices like set-top boxes and smart TVs.
+```yaml
+[Service]
+Restart=always
 
+[Container]
+ContainerName=pihole
+Image=docker.io/pihole/pihole:latest
+Label="io.containers.autoupdate=registry"
+Environment=TZ=America/Vancouver
+Environment=SERVERIP=192.168.0.24
+Environment=WEBPASSWORD=<ADD YOUR OWN PASSWORD>
+PodmanArgs=--dns=127.0.0.1 --dns=8.8.8.8
+Volume=pihole-etc.volume:/etc/pihole:Z
+Volume=pihole-dnsmasq.volume:/etc/dnsmasq.d:Z
+PublishPort=53:53/tcp
+PublishPort=53:53/udp
+PublishPort=80:80/tcp
 
+[Install]
+WantedBy=default.target
+```
+
+`pihole-etc.volume` and `pihole-dnsmasq.volume`
+
+```yaml
+[Volume]
+User=myee
+Group=myee
+```
+
+Open these ports.
+
+```bash
+firewall-cmd --permanent --add-port=53/tcp --add-port=53/udp --add-service=http
+firewall-cmd --reload
+```
+
+Start the service.
+```bash
+systemctl --user start pihole.service
+```
