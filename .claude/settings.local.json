@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -s https://raw.githubusercontent.com/cotes2020/jekyll-theme-chirpy/v7.5.0/_includes/head.html)",
+      "Bash(curl -s https://raw.githubusercontent.com/cotes2020/chirpy-starter/main/_config.yml)",
+      "Bash(curl -s https://raw.githubusercontent.com/cotes2020/chirpy-starter/main/Gemfile)",
+      "Bash(curl -s https://raw.githubusercontent.com/cotes2020/chirpy-starter/main/.github/workflows/pages-deploy.yml)",
+      "Bash(curl -s https://raw.githubusercontent.com/cotes2020/jekyll-theme-chirpy/v7.5.0/_includes/favicons.html)",
+      "Bash(curl -s https://raw.githubusercontent.com/cotes2020/jekyll-theme-chirpy/v7.4.0/_includes/head.html)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(bundle update *)",
+      "Bash(ruby --version)",
+      "Bash(sips -z 96 96 /Users/myee/repos/myee111.github.io/assets/img/favicons/favicon-96x96.png)",
+      "Bash(/opt/homebrew/opt/ruby/bin/ruby --version)",
+      "Read(//opt/homebrew/Cellar/ruby/4.0.3/bin/**)",
+      "Bash(/opt/homebrew/opt/ruby/bin/bundle update *)",
+      "Bash(/opt/homebrew/opt/ruby@3.3/bin/ruby --version)",
+      "Bash(export PATH=\"/opt/homebrew/opt/ruby@3.3/bin:$PATH\")",
+      "Bash(export GEM_HOME=\"$HOME/.gem/ruby/3.3.0\")",
+      "Bash(export PATH=\"$GEM_HOME/bin:$PATH\")",
+      "Bash(~/.rbenv/versions/3.3.7/bin/ruby --version)",
+      "Bash(export PATH=\"$HOME/.rbenv/versions/3.3.7/bin:$PATH\")",
+      "Bash(export GEM_HOME=\"$HOME/.rbenv/versions/3.3.7/lib/ruby/gems/3.3.0\")",
+      "Bash(unset GEM_PATH)",
+      "Bash(gem install *)",
+      "Bash(bundle install *)",
+      "Bash(pkill -f \"jekyll serve\")"
+    ]
+  }
+}
