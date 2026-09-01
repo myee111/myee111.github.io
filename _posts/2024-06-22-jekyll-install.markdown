@@ -18,12 +18,12 @@ The `assets` directory is a link to Chirpy docs. Delete the `assets` directory a
 
 Go into `Settings`.
 
-![Github Settings](/assets/lib/githubsettings.png)
+![Github Settings](/assets/img/githubsettings.png)
 
 Click on `Pages`
 
-![Pages](/assets/lib/githubpages.png)
+![Pages](/assets/img/githubpages.png)
 
 In the `Source` dropdown box, select `GitHub Actions`.
 
-![Github Actions Config](/assets/lib/githubactionsconfig.png)
+![Github Actions Config](/assets/img/githubactionsconfig.png)

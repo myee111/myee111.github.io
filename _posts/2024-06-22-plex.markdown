@@ -5,6 +5,7 @@ date:   2024-06-23 19:56:00 -0700
 categories: podman plex
 ---
 ## Introduction
+
 In this blog entry I share how I configured my [Fedora](https://fedoraproject.org/) 40 server to run Plex as a rootless Podman container.
 
 [Podman](https://docs.podman.io/en/latest/) is an open source tool that runs [OCI](https://opencontainers.org/) compliant containers. This includes containers hosted at [docker hub.](https://hub.docker.com/) Podman can run containers in user accounts (ie. non-root accounts).
@@ -12,6 +13,7 @@ In this blog entry I share how I configured my [Fedora](https://fedoraproject.or
 [Plex](https://www.plex.tv/) lets you stream and share multimedia files. The nice thing about Plex is that it's supported on Apple TV and numerous other devices like set-top boxes and smart TVs.
 
 ## Overview
+
 Here are the tasks required to set up the Plex container to run as a user owned service with Podman.
 
 0. Open firewall ports on container host.
@@ -24,17 +26,21 @@ Here are the tasks required to set up the Plex container to run as a user owned 
 ## Open firewall ports on container host
 
 Run the following.
+
 ```bash
 sudo firewall-cmd --add-port=1900/udp --add-port=5353/udp --add-port=8324/tcp --add-port=32400 --add-port=32410/udp --add-port=32412/udp --add-port=32413/udp --add-port=32414/udp --add-port=32469/tcp --permanent
 ```
+
 This command loads a configuration to open all the specified ports.
 
 Then run the following to load the changes.
+
 ```bash
 sudo firewall-cmd --reload
 ```
 
 ## Install Podman
+
 First, install Podman.
 
 ```terminal
@@ -43,9 +49,9 @@ sudo dnf -y install podman
 
 ## Create the `Plex` `systemd` unit file
 
-The official documentation for the Plex container can be found [here](https://hub.docker.com/r/plexinc/pms-docker/).
+The official documentation for the Plex container can be found on [Docker Hub](https://hub.docker.com/r/plexinc/pms-docker/).
 
-Podman enables you to run containers as a service in a non-root account. We need to create a `systemd` unit file in our user account `myee`. We'll call it `plex.container`. All of the systemd unit files discussed are available [here](https://github.com/myee111/plex-rootless-podman-systemd-unit-files).
+Podman enables you to run containers as a service in a non-root account. We need to create a `systemd` unit file in our user account `myee`. We'll call it `plex.container`. All of the systemd unit files discussed are available in the [plex-rootless-podman-systemd-unit-files repository](https://github.com/myee111/plex-rootless-podman-systemd-unit-files).
 
 Make a directory to store your systemd unit files.
 
@@ -85,7 +91,8 @@ PublishPort=32469:32469/tcp
 [Install]
 WantedBy=default.target
 ```
-### Further explanation of the `plex.container` file.
+
+### Further explanation of the `plex.container` file
 
 - `ContainerName=plex`:
 This is self-explanatory. This is the name given to the container.
@@ -127,6 +134,7 @@ You must also create 3 files in `~/.config/containers/systemd/`
 3. `plex-tv.volume`
 
 All three contain the following.
+
 ```ini
 [Volume]
 User=<username>
@@ -134,6 +142,7 @@ Group=<group>
 ```
 
 In my example I have the following contents.
+
 ```ini
 [Volume]
 User=myee
@@ -143,11 +152,13 @@ Group=myee
 ## Enable the podman service
 
 Load the unit files into systemd.
+
 ```bash
 systemctl --user daemon-reload
 ```
 
 Enable and start the Plex service.
+
 ```bash
 systemctl --user start plex.service
 ```
@@ -155,11 +166,13 @@ systemctl --user start plex.service
 ## Enable automatic updates
 
 Enable automatic updates.
+
 ```bash
 systemctl --user enable --now podman-auto-update.service
 ```
 
 Enable automatic updates to run on schedule at midnight.
+
 ```bash
 systemctl --user enable --now podman-auto-update.timer
 ```
@@ -168,4 +181,4 @@ systemctl --user enable --now podman-auto-update.timer
 
 Open a browser window to your Podman host at port 32400.
 
-![Plex Welcome](/assets/lib/plex-welcome.png)
+![Plex Welcome](/assets/img/plex-welcome.png)
