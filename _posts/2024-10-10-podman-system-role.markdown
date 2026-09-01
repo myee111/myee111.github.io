@@ -2,10 +2,10 @@
 layout: post
 title:  "RHEL System Role for Podman"
 date:   2024-10-10 14:04:00 -0700
-categories: stuff
+categories: stuff, podman, ansible
 ---
 
-```
+```yaml
 - name: Configure Podman to run a web server as a rootless container.
   hosts: localhost
   tasks:
