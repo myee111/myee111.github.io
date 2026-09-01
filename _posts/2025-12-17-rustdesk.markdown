@@ -7,10 +7,10 @@ categories: podman rustdesk
 
 ## Introduction
 
-1) Open up the right ports.
-2) Write the rustdesk systemd unit file.
-3) Write a volume file.
-4) Copy the rustdesk client encryption key.
+1. Open up the right ports.
+1. Write the rustdesk systemd unit file.
+1. Write a volume file.
+1. Copy the rustdesk client encryption key.
 
 ## Open up the required firewall ports.
 

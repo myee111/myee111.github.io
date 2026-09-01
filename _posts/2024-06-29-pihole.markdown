@@ -46,6 +46,7 @@ firewall-cmd --reload
 ```
 
 Start the service.
+
 ```bash
 systemctl --user start pihole.service
 ```
