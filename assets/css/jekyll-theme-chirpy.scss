@@ -15,3 +15,18 @@
 ';
 
 /* append your custom style below */
+
+@use 'sass:string';
+
+/*
+ * A handful of theme rules hardcode 'Lato'/'Oswald' instead of using the
+ * $font-family-* variables above, so they need a direct override here.
+ */
+$font-family-override: '"Atkinson Hyperlegible", "Microsoft Yahei", sans-serif';
+
+.date.day, /* day number in the Archives list */
+.pagination, /* pager at the bottom of paginated post lists */
+.tag span, /* count badge inside a tag pill */
+kbd /* keyboard-key styling */ {
+  font-family: string.unquote($font-family-override);
+}
