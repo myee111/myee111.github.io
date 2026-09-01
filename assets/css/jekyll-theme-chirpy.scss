@@ -30,3 +30,532 @@ $font-family-override: '"Atkinson Hyperlegible", "Microsoft Yahei", sans-serif';
 kbd /* keyboard-key styling */ {
   font-family: string.unquote($font-family-override);
 }
+
+/* ==========================================================================
+ * Nord color scheme › https://www.nordtheme.com/docs/colors-and-palettes
+ * Chirpy exposes almost all of its colors as CSS custom properties scoped to
+ * :root[data-bs-theme='light'|'dark'], so we just re-declare them here with
+ * Nord's palette. This block is appended after the theme's own styles, and
+ * uses the exact same selectors, so it wins the cascade (same specificity,
+ * later source order) without needing !important anywhere.
+ * ========================================================================== */
+
+/* Polar Night */
+$nord0: #2e3440;
+$nord1: #3b4252;
+$nord2: #434c5e;
+$nord3: #4c566a;
+/* Snow Storm */
+$nord4: #d8dee9;
+$nord5: #e5e9f0;
+$nord6: #eceff4;
+/* Frost */
+$nord7: #8fbcbb;
+$nord8: #88c0d0;
+$nord9: #81a1c1;
+$nord10: #5e81ac;
+/* Aurora */
+$nord11: #bf616a;
+$nord12: #d08770;
+$nord13: #ebcb8b;
+$nord14: #a3be8c;
+$nord15: #b48ead;
+/* Darker aurora/frost variants, for legible text on light backgrounds */
+$nord7-dark: #5e9491;
+$nord9-dark: #4c6c94;
+$nord11-dark: #a0333d;
+$nord12-dark: #a85d3f;
+$nord13-dark: #a6790a;
+$nord14-dark: #4c9a5b;
+$nord15-dark: #8f5f87;
+
+:root[data-bs-theme='dark'] {
+  /* Framework color */
+  --main-bg: #{$nord0};
+  --mask-bg: #{$nord3};
+  --main-border-color: #{$nord1};
+
+  /* Common color */
+  --text-color: #{$nord4};
+  --text-muted-color: #9aa5b4;
+  --text-muted-highlight-color: #{$nord5};
+  --heading-color: #{$nord6};
+  --label-color: #{$nord4};
+  --blockquote-border-color: #{$nord3};
+  --blockquote-text-color: #9aa5b4;
+  --link-color: #{$nord8};
+  --link-underline-color: #{$nord3};
+  --button-bg: #{$nord1};
+  --btn-border-color: #{$nord2};
+  --btn-backtotop-color: var(--text-color);
+  --btn-backtotop-border-color: #{$nord2};
+  --card-header-bg: #{$nord1};
+  --checkbox-color: #{$nord3};
+  --checkbox-checked-color: #{$nord8};
+  --img-bg: radial-gradient(circle, #{$nord1} 0%, #{$nord0} 100%);
+  --shimmer-bg: linear-gradient(
+    90deg,
+    rgb(216 222 233 / 0%) 0%,
+    rgb(129 161 193 / 25%) 50%,
+    rgb(216 222 233 / 0%) 100%
+  );
+  --menu-bg: #{$nord1};
+  --menu-border-color: rgb(76 86 106 / 60%);
+  --menu-shadow-color: rgb(0 0 0 / 30%);
+  --menu-active-color: #{$nord6};
+  --menu-highlight-bg: rgb(136 192 208 / 12%);
+
+  /* Sidebar */
+  --site-title-color: #{$nord4};
+  --site-subtitle-color: #9aa5b4;
+  --sidebar-bg: #{$nord1};
+  --sidebar-border-color: #{$nord2};
+  --sidebar-muted-color: #9aa5b4;
+  --sidebar-active-color: #{$nord6};
+  --sidebar-hover-bg: #{$nord2};
+  --sidebar-btn-bg: #{$nord0};
+  --sidebar-btn-color: #{$nord9};
+  --avatar-border-color: rgb(216 222 233 / 90%);
+
+  /* Topbar */
+  --topbar-bg: rgb(46 52 64 / 70%);
+  --topbar-text-color: var(--text-color);
+  --search-border-color: #{$nord2};
+  --search-icon-color: #{$nord3};
+  --input-focus-border-color: #{$nord9};
+
+  /* Home page */
+  --post-list-text-color: #{$nord4};
+  --btn-patinator-text-color: var(--text-color);
+  --btn-paginator-hover-color: #{$nord1};
+
+  /* Posts */
+  --toc-highlight: #{$nord8};
+  --toc-popup-border-color: #{$nord3};
+  --tag-hover: rgb(136 192 208 / 20%);
+  --tb-odd-bg: #333a48;
+  --tb-even-bg: #{$nord0};
+  --tb-border-color: var(--tb-odd-bg);
+  --footnote-target-bg: #{$nord10};
+  --btn-share-color: #9aa5b4;
+  --btn-share-hover-color: #{$nord8};
+  --card-bg: #{$nord1};
+  --card-hover-bg: #{$nord2};
+  --card-shadow:
+    rgb(0 0 0 / 30%) 0 6px 18px 0, rgb(76 86 106 / 25%) 0 0 0 1px;
+  --kbd-wrap-color: #{$nord3};
+  --kbd-text-color: #{$nord6};
+  --kbd-bg-color: #{$nord0};
+  --prompt-text-color: rgb(216 222 233 / 85%);
+  --prompt-tip-bg: rgb(163 190 140 / 20%);
+  --prompt-tip-icon-color: #{$nord14};
+  --prompt-info-bg: rgb(136 192 208 / 18%);
+  --prompt-info-icon-color: #{$nord8};
+  --prompt-warning-bg: rgb(235 203 139 / 20%);
+  --prompt-warning-icon-color: #{$nord13};
+  --prompt-danger-bg: rgb(191 97 106 / 20%);
+  --prompt-danger-icon-color: #{$nord11};
+
+  /* Tags */
+  --tag-border: #{$nord3};
+  --tag-shadow: rgb(0 0 0 / 20%);
+  --search-tag-bg: #{$nord1};
+
+  /* Categories */
+  --categories-border: rgb(76 86 106 / 50%);
+  --categories-hover-bg: #{$nord2};
+  --categories-icon-hover-color: #{$nord6};
+
+  /* Archive */
+  --timeline-node-bg: #{$nord9};
+  --timeline-color: rgb(76 86 106 / 50%);
+  --timeline-year-dot-color: var(--timeline-color);
+
+  /* Code highlight colors */
+  --language-border-color: #{$nord1};
+  --highlight-bg-color: #{$nord0};
+  --highlighter-rouge-color: #{$nord8};
+  --highlight-lineno-color: #{$nord3};
+  --inline-code-bg: rgb(216 222 233 / 8%);
+  --code-color: #{$nord4};
+  --code-header-text-color: #{$nord3};
+  --code-header-muted-color: #{$nord2};
+  --code-header-icon-color: #{$nord3};
+  --clipboard-checked-color: #{$nord14};
+  --filepath-text-color: #{$nord4};
+
+  /* Syntax highlighting, loosely following the Nord palette */
+  .highlight,
+  .highlight .w {
+    color: #{$nord4};
+    background-color: #{$nord0};
+  }
+
+  .highlight .err {
+    color: #{$nord0};
+    background-color: #{$nord11};
+  }
+
+  .highlight .c,
+  .highlight .ch,
+  .highlight .cd,
+  .highlight .cm,
+  .highlight .cp,
+  .highlight .cpf,
+  .highlight .c1,
+  .highlight .cs {
+    color: #{$nord3};
+  }
+
+  .highlight .gp {
+    color: #{$nord3};
+  }
+
+  .highlight .nt,
+  .highlight .o,
+  .highlight .ow,
+  .highlight .na {
+    color: #{$nord9};
+  }
+
+  .highlight .p,
+  .highlight .pi {
+    color: #{$nord4};
+  }
+
+  .highlight .gi {
+    color: #{$nord14};
+    background-color: rgb(163 190 140 / 10%);
+  }
+
+  .highlight .gd {
+    color: #{$nord11};
+    background-color: rgb(191 97 106 / 12%);
+  }
+
+  .highlight .gh,
+  .highlight .gu {
+    color: #{$nord8};
+    background-color: #{$nord0};
+    font-weight: bold;
+  }
+
+  .highlight .k,
+  .highlight .kn,
+  .highlight .kp,
+  .highlight .kr,
+  .highlight .kv {
+    color: #{$nord9};
+  }
+
+  .highlight .kc,
+  .highlight .kt,
+  .highlight .kd {
+    color: #{$nord7};
+  }
+
+  .highlight .s,
+  .highlight .sb,
+  .highlight .sc,
+  .highlight .dl,
+  .highlight .sd,
+  .highlight .s2,
+  .highlight .sh,
+  .highlight .sx,
+  .highlight .s1,
+  .highlight .ss {
+    color: #{$nord14};
+  }
+
+  .highlight .sa,
+  .highlight .bp,
+  .highlight .ne,
+  .highlight .nl,
+  .highlight .py,
+  .highlight .nv,
+  .highlight .vc,
+  .highlight .vg,
+  .highlight .vi,
+  .highlight .vm {
+    color: #{$nord9};
+  }
+
+  .highlight .sr,
+  .highlight .si,
+  .highlight .se {
+    color: #{$nord15};
+  }
+
+  .highlight .nn,
+  .highlight .nc,
+  .highlight .no {
+    color: #{$nord7};
+  }
+
+  .highlight .nd,
+  .highlight .nf,
+  .highlight .fm {
+    color: #{$nord8};
+  }
+
+  .highlight .m,
+  .highlight .mb,
+  .highlight .mf,
+  .highlight .mh,
+  .highlight .mi,
+  .highlight .il,
+  .highlight .mo,
+  .highlight .mx {
+    color: #{$nord15};
+  }
+
+  .highlight .c,
+  .highlight .gl,
+  .highlight .gt {
+    color: #{$nord3};
+  }
+}
+
+:root[data-bs-theme='light'] {
+  /* Framework color */
+  --main-bg: #{$nord6};
+  --mask-bg: #{$nord4};
+  --main-border-color: #{$nord5};
+
+  /* Common color */
+  --text-color: #{$nord0};
+  --text-muted-color: #{$nord3};
+  --text-muted-highlight-color: #{$nord2};
+  --heading-color: #{$nord0};
+  --label-color: #{$nord1};
+  --blockquote-border-color: #{$nord4};
+  --blockquote-text-color: #{$nord3};
+  --link-color: #{$nord10};
+  --link-underline-color: #{$nord4};
+  --button-bg: #ffffff;
+  --btn-border-color: #{$nord5};
+  --btn-backtotop-color: #{$nord3};
+  --btn-backtotop-border-color: #{$nord5};
+  --checkbox-color: #{$nord4};
+  --checkbox-checked-color: #{$nord10};
+  --img-bg: radial-gradient(circle, #ffffff 0%, #{$nord5} 100%);
+  --shimmer-bg: linear-gradient(
+    90deg,
+    rgb(236 239 244 / 0%) 0%,
+    rgb(216 222 233 / 100%) 50%,
+    rgb(236 239 244 / 0%) 100%
+  );
+  --menu-bg: #ffffff;
+  --menu-border-color: #ffffff;
+  --menu-shadow-color: rgb(46 52 64 / 16%);
+  --menu-active-color: #{$nord1};
+  --menu-highlight-bg: rgb(229 233 240 / 60%);
+
+  /* Sidebar */
+  --site-title-color: #{$nord3};
+  --site-subtitle-color: #{$nord3};
+  --sidebar-bg: #{$nord5};
+  --sidebar-border-color: #{$nord4};
+  --sidebar-muted-color: #{$nord3};
+  --sidebar-active-color: #{$nord0};
+  --sidebar-hover-bg: rgb(94 129 172 / 12%);
+  --sidebar-btn-bg: #ffffff;
+  --sidebar-btn-color: #{$nord10};
+  --avatar-border-color: #ffffff;
+
+  /* Topbar */
+  --topbar-bg: rgb(236 239 244 / 75%);
+  --topbar-text-color: #{$nord1};
+  --search-border-color: #{$nord4};
+  --search-icon-color: #a9b3c4;
+  --input-focus-border-color: #{$nord9};
+
+  /* Home page */
+  --post-list-text-color: #{$nord3};
+  --btn-patinator-text-color: #{$nord1};
+  --btn-paginator-hover-color: var(--sidebar-bg);
+
+  /* Posts */
+  --toc-highlight: #{$nord10};
+  --toc-popup-border-color: #{$nord4};
+  --btn-share-color: #{$nord3};
+  --btn-share-hover-color: #{$nord10};
+  --card-bg: #ffffff;
+  --card-hover-bg: #{$nord5};
+  --card-shadow:
+    rgb(76 86 106 / 8%) 0 2px 6px 0, rgb(76 86 106 / 12%) 0 0 0 1px;
+  --footnote-target-bg: #{$nord4};
+  --tb-odd-bg: #f7f9fb;
+  --tb-border-color: #{$nord5};
+  --dash-color: #{$nord4};
+  --kbd-wrap-color: #{$nord4};
+  --kbd-text-color: var(--text-color);
+  --kbd-bg-color: #ffffff;
+  --prompt-text-color: rgb(46 52 64 / 80%);
+  --prompt-tip-bg: rgb(163 190 140 / 20%);
+  --prompt-tip-icon-color: #{$nord14-dark};
+  --prompt-info-bg: rgb(136 192 208 / 18%);
+  --prompt-info-icon-color: #{$nord9-dark};
+  --prompt-warning-bg: rgb(235 203 139 / 30%);
+  --prompt-warning-icon-color: #{$nord13-dark};
+  --prompt-danger-bg: rgb(191 97 106 / 20%);
+  --prompt-danger-icon-color: #{$nord11-dark};
+
+  /* Tags */
+  --tag-border: #{$nord4};
+  --tag-shadow: var(--btn-border-color);
+  --tag-hover: #{$nord4};
+
+  /* Categories */
+  --categories-border: rgb(76 86 106 / 12.5%);
+  --categories-hover-bg: #{$nord5};
+  --categories-icon-hover-color: #{$nord0};
+
+  /* Archive */
+  --timeline-color: rgb(76 86 106 / 15%);
+  --timeline-node-bg: #{$nord9};
+  --timeline-year-dot-color: #ffffff;
+
+  /* Code highlight colors */
+  --language-border-color: #{$nord5};
+  --highlight-bg-color: #{$nord5};
+  --highlighter-rouge-color: #{$nord9-dark};
+  --highlight-lineno-color: #a9b3c4;
+  --inline-code-bg: rgb(46 52 64 / 6%);
+  --code-color: #{$nord1};
+  --code-header-text-color: #a9b3c4;
+  --code-header-muted-color: #{$nord4};
+  --code-header-icon-color: #c4ccd8;
+  --clipboard-checked-color: #{$nord14-dark};
+  --filepath-text-color: #{$nord1};
+
+  /* Syntax highlighting, loosely following the Nord palette */
+  .highlight,
+  .highlight .w {
+    color: #{$nord1};
+    background-color: #{$nord5};
+  }
+
+  .highlight .err {
+    color: #{$nord6};
+    background-color: #{$nord11-dark};
+  }
+
+  .highlight .c,
+  .highlight .ch,
+  .highlight .cd,
+  .highlight .cm,
+  .highlight .cp,
+  .highlight .cpf,
+  .highlight .c1,
+  .highlight .cs {
+    color: #{$nord3};
+  }
+
+  .highlight .gp {
+    color: #{$nord3};
+  }
+
+  .highlight .nt,
+  .highlight .o,
+  .highlight .ow,
+  .highlight .na {
+    color: #{$nord9-dark};
+  }
+
+  .highlight .p,
+  .highlight .pi {
+    color: #{$nord1};
+  }
+
+  .highlight .gi {
+    color: #{$nord14-dark};
+    background-color: rgb(163 190 140 / 15%);
+  }
+
+  .highlight .gd {
+    color: #{$nord11-dark};
+    background-color: rgb(191 97 106 / 15%);
+  }
+
+  .highlight .gh,
+  .highlight .gu {
+    color: #{$nord10};
+    background-color: #{$nord5};
+    font-weight: bold;
+  }
+
+  .highlight .k,
+  .highlight .kn,
+  .highlight .kp,
+  .highlight .kr,
+  .highlight .kv {
+    color: #{$nord10};
+  }
+
+  .highlight .kc,
+  .highlight .kt,
+  .highlight .kd {
+    color: #{$nord7-dark};
+  }
+
+  .highlight .s,
+  .highlight .sb,
+  .highlight .sc,
+  .highlight .dl,
+  .highlight .sd,
+  .highlight .s2,
+  .highlight .sh,
+  .highlight .sx,
+  .highlight .s1,
+  .highlight .ss {
+    color: #{$nord14-dark};
+  }
+
+  .highlight .sa,
+  .highlight .bp,
+  .highlight .ne,
+  .highlight .nl,
+  .highlight .py,
+  .highlight .nv,
+  .highlight .vc,
+  .highlight .vg,
+  .highlight .vi,
+  .highlight .vm {
+    color: #{$nord10};
+  }
+
+  .highlight .sr,
+  .highlight .si,
+  .highlight .se {
+    color: #{$nord15-dark};
+  }
+
+  .highlight .nn,
+  .highlight .nc,
+  .highlight .no {
+    color: #{$nord7-dark};
+  }
+
+  .highlight .nd,
+  .highlight .nf,
+  .highlight .fm {
+    color: #{$nord9-dark};
+  }
+
+  .highlight .m,
+  .highlight .mb,
+  .highlight .mf,
+  .highlight .mh,
+  .highlight .mi,
+  .highlight .il,
+  .highlight .mo,
+  .highlight .mx {
+    color: #{$nord15-dark};
+  }
+
+  .highlight .gl,
+  .highlight .gt {
+    color: #{$nord3};
+  }
+}
